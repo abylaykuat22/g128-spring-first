@@ -14,4 +14,6 @@ public class Country {
   private Long id;
   private String name;
   private String code;
+  private String mainland;
+  private String worldPart;
 }
