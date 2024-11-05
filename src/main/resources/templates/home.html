@@ -7,12 +7,22 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body class="container">
+
+<form action="/country/create" method="post">
+  <input type="text" name="name" placeholder="Insert name..." class="form-control"><br>
+  <input type="text" name="code" placeholder="Insert code..." class="form-control"><br>
+  <input type="text" name="mainland" placeholder="Insert mainland..." class="form-control"><br>
+  <input type="text" name="worldPart" placeholder="Insert worldPart..." class="form-control"><br>
+  <button class="btn btn-primary">Add country</button>
+</form><br>
+
 <table class="table table-bordered table-primary">
   <thead>
   <tr>
     <td><b>ID</b></td>
     <td><b>NAME</b></td>
     <td><b>CODE</b></td>
+    <td><b>DETAILS</b></td>
   </tr>
   </thead>
   <tbody>
@@ -22,6 +32,7 @@
       <td th:text="${strana.id}"></td>
       <td th:text="${strana.name}"></td>
       <td th:text="${strana.code}"></td>
+      <td><a th:href="${'/country/' + strana.id}">DETAILS</a></td>
     </tr>
   </tbody>
 </table>
