@@ -13,6 +13,9 @@
   <li th:text="${strana.code}" class="list-group-item"></li>
   <li th:text="${strana.mainland}" class="list-group-item"></li>
   <li th:text="${strana.worldPart}" class="list-group-item"></li>
+  <form th:action="${'/country/delete/' + strana.id}" method="post">
+    <button class="btn btn-danger">DELETE</button>
+  </form>
 </ul>
 </body>
 </html>

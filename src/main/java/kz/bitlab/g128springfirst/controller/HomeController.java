@@ -31,6 +31,26 @@ public class HomeController {
     return "countryDetails";
   }
 
+  @GetMapping("/country/edit/{id}")
+  public String editPage(@PathVariable Long id, Model model) {
+    Country country = countryService.getById(id);
+    model.addAttribute("country", country);
+    return "editPage";
+  }
+
+  @PostMapping("/country/edit")
+  public String edit(
+      @RequestParam Long id,
+      @RequestParam String name,
+      @RequestParam String code,
+      @RequestParam String mainland,
+      @RequestParam String worldPart
+  ) {
+    Country country = new Country(id, name, code, mainland, worldPart);
+    countryService.edit(country);
+    return "redirect:/";
+  }
+
   @PostMapping("/country/create")
   public String create(@RequestParam String name,
       @RequestParam String code,
@@ -43,6 +63,12 @@ public class HomeController {
         .worldPart(worldPart)
         .build();
     countryService.create(country);
+    return "redirect:/";
+  }
+
+  @PostMapping("/country/delete/{id}")
+  public String delete(@PathVariable Long id) {
+    countryService.deleteById(id);
     return "redirect:/";
   }
 

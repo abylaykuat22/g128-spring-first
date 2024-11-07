@@ -32,7 +32,8 @@
       <td th:text="${strana.id}"></td>
       <td th:text="${strana.name}"></td>
       <td th:text="${strana.code}"></td>
-      <td><a th:href="${'/country/' + strana.id}">DETAILS</a></td>
+      <td><a class="btn btn-dark" th:href="${'/country/' + strana.id}">DETAILS</a></td>
+      <td><a class="btn btn-primary" th:href="${'/country/edit/' + strana.id}">EDIT</a></td>
     </tr>
   </tbody>
 </table>

@@ -3,60 +3,44 @@ package kz.bitlab.g128springfirst.service;
 import java.util.ArrayList;
 import java.util.List;
 import kz.bitlab.g128springfirst.entity.Country;
+import kz.bitlab.g128springfirst.repository.CountryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CountryService {
 
-  private List<Country> countries = new ArrayList<>();
-
-  private Long id = 7L;
-  {
-    countries.add(new Country(1L, "Kazakhstan", "KAZ", "Eurasia", "Asia"));
-    countries.add(new Country(2L, "United states of America", "USA", "North America", "America"));
-    countries.add(new Country(3L, "Canada", "CND", "North America", "America"));
-    countries.add(new Country(4L, "Italy", "ITL", "Eurasia", "Europe"));
-    countries.add(new Country(5L, "France", "FNC", "Eurasia", "Europe"));
-    countries.add(new Country(6L, "Germany", "GD", "Eurasia", "Europe"));
-  }
+  @Autowired
+  private CountryRepository countryRepository;
 
   public void create(Country newCountry) {
     if (newCountry == null) {
       return;
     }
-    newCountry.setId(id);
 
     Country country = getByCode(newCountry.getCode());
     if (country == null) {
-      countries.add(newCountry);
+      countryRepository.save(newCountry);
     }
-    id++;
   }
 
   public List<Country> getAll() {
-    return countries;
+    return countryRepository.findAll();
   }
 
   public Country getById(Long id) {
-    return countries.stream()
-        .filter(country -> id.equals(country.getId()))
-        .findAny()
-        .orElse(null);
+    return countryRepository.findById(id).orElse(null);
   }
 
   public Country getByCode(String code) {
-    return countries.stream()
-        .filter(country -> code.equals(country.getCode()))
-        .findAny()
-        .orElse(null);
+    return countryRepository.findByCode(code).orElse(null);
   }
 
   public void edit(Country country) {
-    // TODO: обновить страну
+    countryRepository.save(country);
   }
 
   public void deleteById(Long id) {
-    Country country = getById(id);
-    countries.remove(country);
+    countryRepository.deleteById(id);
   }
 }
